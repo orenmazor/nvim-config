@@ -31,6 +31,14 @@ packer.startup({
     -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
     use({ "neovim/nvim-lspconfig", config = [[require('config.lsp')]] })
 
+    use({'ibhagwan/fzf-lua'})
+    use { 'junegunn/fzf',
+          config = function()
+            vim.api.nvim_set_keymap('n', '<c-P>',
+    "<cmd>lua require('fzf-lua').files({ prompt=\"LS> \", cmd = \"find .\", cwd=\".\" })<CR>",
+    { noremap = true, silent = true })
+          end
+        }
     -- Python indent (follows the PEP8 style)
     use({ "psf/black", ft = { "python" } })
 

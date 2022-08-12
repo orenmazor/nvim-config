@@ -75,10 +75,6 @@ local custom_attach = function(client, bufnr)
   end
 end
 
-local capabilities = lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 local lspconfig = require("lspconfig")
 
 if utils.executable('pylsp') then
@@ -125,64 +121,6 @@ if utils.executable('clangd') then
   })
 else
   vim.notify("clangd not found!", 'warn', {title = 'Nvim-config'})
-end
-
--- set up vim-language-server
-if utils.executable('vim-language-server') then
-  lspconfig.vimls.setup({
-    on_attach = custom_attach,
-    flags = {
-      debounce_text_changes = 500,
-    },
-    capabilities = capabilities,
-  })
-else
-  vim.notify("vim-language-server not found!", 'warn', {title = 'Nvim-config'})
-end
-
--- set up bash-language-server
-if utils.executable('bash-language-server') then
-  lspconfig.bashls.setup({
-    on_attach = custom_attach,
-    capabilities = capabilities,
-  })
-end
-
-local sumneko_binary_path = fn.exepath("lua-language-server")
-if vim.g.is_mac or vim.g.is_linux and sumneko_binary_path ~= "" then
-  local sumneko_root_path = fn.fnamemodify(sumneko_binary_path, ":h:h:h")
-
-  local runtime_path = vim.split(package.path, ";")
-  table.insert(runtime_path, "lua/?.lua")
-  table.insert(runtime_path, "lua/?/init.lua")
-
-  lspconfig.sumneko_lua.setup({
-    on_attach = custom_attach,
-    cmd = { sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua" },
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = "LuaJIT",
-          -- Setup your lua path
-          path = runtime_path,
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = { "vim" },
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = api.nvim_get_runtime_file("", true),
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-    capabilities = capabilities,
-  })
 end
 
 -- Change diagnostic signs.
