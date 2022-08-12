@@ -74,4 +74,4 @@ let g:loaded_matchparen = 1
 
 " Disable sql omni completion, it is broken.
 let g:loaded_sql_completion = 1
-"}
+"} 
