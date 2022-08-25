@@ -1,31 +1,5 @@
 local fn = vim.fn
 
-local function trailing_space()
-  if not vim.o.modifiable then
-    return ""
-  end
-
-  local line_num = nil
-
-  for i=1, fn.line('$') do
-    local linetext = fn.getline(i)
-    -- To prevent invalid escape error, we wrap the regex string with `[[]]`.
-    local idx = fn.match(linetext, [[\v\s+$]])
-
-    if idx ~= -1 then
-      line_num = i
-      break
-    end
-  end
-
-  local msg = ""
-  if line_num ~= nil then
-    msg = string.format("[%d]trailing", line_num)
-  end
-
-  return msg
-end
-
 local function mixed_indent()
   if not vim.o.modifiable then
     return ""
@@ -97,10 +71,6 @@ require("lualine").setup({
       {
         "diagnostics",
         sources = { "nvim_diagnostic" }
-      },
-      {
-        trailing_space,
-        color = "WarningMsg"
       },
       {
         mixed_indent,

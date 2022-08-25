@@ -108,13 +108,6 @@ packer.startup({
     -- Plug 'junegunn/vim-peekaboo'
     use({ "jdhao/better-escape.vim", event = { "InsertEnter" } })
 
-    if vim.g.is_mac then
-      use({ "lyokha/vim-xkbswitch", event = { "InsertEnter" } })
-    elseif vim.g.is_win then
-      use({ "Neur1n/neuims", event = { "InsertEnter" } })
-    end
-
-
     use({ "sbdchd/neoformat", cmd = { "Neoformat" } })
     -- use 'Chiel92/vim-autoformat'
 
