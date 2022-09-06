@@ -28,8 +28,12 @@ packer.startup({
     -- package management for neovim
     use({"wbthomason/packer.nvim", opt = true})
 
+    -- linter support with ale
+    use({'dense-analysis/ale'})
+    
     -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
     use({ "neovim/nvim-lspconfig", config = [[require('config.lsp')]] })
+
 
     use({'ibhagwan/fzf-lua'})
     use { 'junegunn/fzf',
@@ -74,13 +78,6 @@ packer.startup({
     -- Highlight URLs inside vim
     use({"itchyny/vim-highlighturl", event = "VimEnter"})
 
-    -- For Windows and Mac, we can open an URL in the browser. For Linux, it may
-    -- not be possible since we maybe in a server which disables GUI.
-    if vim.g.is_win or vim.g.is_mac then
-      -- open URL in browser
-      use({"tyru/open-browser.vim", event = "VimEnter"})
-    end
-
     -- Comment plugin
     use({"tpope/vim-commentary", event = "VimEnter"})
 
@@ -95,11 +92,7 @@ packer.startup({
       use({"svermeulen/vim-yoink", event = "VimEnter"})
     end
 
-    -- Show the content of register in preview window
-    -- Plug 'junegunn/vim-peekaboo'
-    use({ "jdhao/better-escape.vim", event = { "InsertEnter" } })
-
-    use({ "sbdchd/neoformat", cmd = { "Neoformat" } })
+    -- use({ "sbdchd/neoformat", cmd = { "Neoformat" } })
     -- use 'Chiel92/vim-autoformat'
 
     -- Git command inside vim
@@ -112,10 +105,6 @@ packer.startup({
     use({ "plasticboy/vim-markdown", ft = { "markdown" } })
 
     use({'folke/zen-mode.nvim', cmd = 'ZenMode', config = [[require('config.zen-mode')]]})
-
-    if vim.g.is_mac then
-      use({ "rhysd/vim-grammarous", ft = { "markdown" } })
-    end
 
     -- Add indent object for vim (useful for languages like Python)
     use({"michaeljsmith/vim-indent-object", event = "VimEnter"})

@@ -16,12 +16,18 @@ call utils#Cabbrev('ps', 'PackerSync')
 "                      configurations for vim script plugin                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""neoformat settings"""""""""""""""""""""""""""""""
-augroup fmt
-  autocmd!
-augroup END
+""""""""""""""""""""""""""""ale linter settings"""""""""""""""""""""""""""""""
+let g:ale_sign_error = "◉"
+let g:ale_sign_warning = "◉"
+highlight ALEErrorSign ctermfg=9 ctermbg=Black guifg=#C30500 guibg=Black
+highlight ALEWarningSign ctermfg=11 ctermbg=Black guifg=#ED6237 guibg=Black
+highlight ALEError ctermfg=Black ctermbg=DarkGrey guifg=#C30500 guibg=Black
+highlight ALEWarning ctermfg=Black ctermbg=DarkGrey guifg=#ED6237 guibg=Black
+let g:ale_linters = {'python': ['mypy', 'flake8', 'pylint'], 'sh': ['shellcheck'], 'markdown': ['vale', 'markdownlint'], 'text': ['vale']}
+let g:ale_python_flake8_options = '--max-line-length=90'
+let g:ale_python_mypy_options = '--strict'
 
- 
+
 """"""""""""""""""""""""""""vim-matchup settings"""""""""""""""""""""""""""""
 " Improve performance
 let g:matchup_matchparen_deferred = 1
@@ -145,21 +151,6 @@ endif
 
 """"""""""""""""""""""""""""better-escape.vim settings"""""""""""""""""""""""""
 let g:better_escape_interval = 200
-
-
-"""""""""""""""""""""""""""""" neoformat settings """""""""""""""""""""""
-let g:neoformat_enabled_python = ['black', 'yapf']
-let g:neoformat_cpp_clangformat = {
-      \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
-      \ }
-let g:neoformat_c_clangformat = {
-      \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
-      \ }
-
-let g:neoformat_enabled_cpp = ['clangformat']
-let g:neoformat_enabled_c = ['clangformat']
 
 """""""""""""""""""""""""vim-signify settings""""""""""""""""""""""""""""""
 " The VCS to use

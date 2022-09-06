@@ -13,33 +13,17 @@ augroup term_settings
   autocmd TermOpen * startinsert
 augroup END
 
+" augroup fmt
+"   autocmd!
+"   " using undojoin makes sure that undo will never
+"   " undo the neoformat changes when we write
+"   autocmd BufWritePre * undojoin | Neoformat
+" augroup END
 " More accurate syntax highlighting? (see `:h syn-sync`)
 augroup accurate_syn_highlight
   autocmd!
   autocmd BufEnter * :syntax sync fromstart
 augroup END
-
-" Return to last cursor position when opening a file
-augroup resume_cursor_position
-  autocmd!
-  autocmd BufReadPost * call s:resume_cursor_position()
-augroup END
-
-" Only resume last cursor position when there is no go-to-line command (something like '+23').
-function s:resume_cursor_position() abort
-  if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-    let l:args = v:argv  " command line arguments
-    for l:cur_arg in l:args
-      " Check if a go-to-line command is given.
-      let idx = match(l:cur_arg, '\v^\+(\d){1,}$')
-      if idx != -1
-        return
-      endif
-    endfor
-
-    execute "normal! g`\"zvzz"
-  endif
-endfunction
 
 " Display a message when the current file is not in utf-8 format.
 " Note that we need to use `unsilent` command here because of this issue:
@@ -93,32 +77,6 @@ augroup highlight_yank
   autocmd!
   au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankColor", timeout=300, on_visual=false}
 augroup END
-
-augroup auto_close_win
-  autocmd!
-  autocmd BufEnter * call s:quit_current_win()
-augroup END
-
-" Quit Nvim if we have only one window, and its filetype match our pattern.
-function! s:quit_current_win() abort
-  let l:quit_filetypes = ['qf', 'vista', 'NvimTree']
-
-  let l:should_quit = v:true
-
-  let l:tabwins = nvim_tabpage_list_wins(0)
-  for w in l:tabwins
-    let l:buf = nvim_win_get_buf(w)
-    let l:bf = getbufvar(l:buf, '&filetype')
-
-    if index(l:quit_filetypes, l:bf) == -1
-      let l:should_quit = v:false
-    endif
-  endfor
-
-  if l:should_quit
-    qall
-  endif
-endfunction
 
 augroup git_repo_check
   autocmd!
