@@ -81,12 +81,6 @@ packer.startup({
     -- Comment plugin
     use({"tpope/vim-commentary", event = "VimEnter"})
 
-    -- Autosave files on certain events
-    use({"907th/vim-auto-save", event = "InsertEnter"})
-
-    -- Show undo history visually
-    use({"simnalamburt/vim-mundo", cmd = {"MundoToggle", "MundoShow"}})
-
     -- Manage your yank history
     if vim.g.is_win or vim.g.is_mac then
       use({"svermeulen/vim-yoink", event = "VimEnter"})
@@ -118,8 +112,6 @@ packer.startup({
         vim.defer_fn(function() require('config.neoscroll') end, 2000)
       end
     })
-
-    use({"tpope/vim-scriptease", cmd = {"Scriptnames", "Message", "Verbose"}})
 
     -- showing keybindings
     use {"folke/which-key.nvim",

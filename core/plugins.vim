@@ -15,6 +15,7 @@ call utils#Cabbrev('ps', 'PackerSync')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                      configurations for vim script plugin                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-n> :bnext<CR>:redraw<CR>:ls<CR>
 
 """"""""""""""""""""""""""""ale linter settings"""""""""""""""""""""""""""""""
 let g:ale_sign_error = "◉"
@@ -24,8 +25,10 @@ highlight ALEWarningSign ctermfg=11 ctermbg=Black guifg=#ED6237 guibg=Black
 highlight ALEError ctermfg=Black ctermbg=DarkGrey guifg=#C30500 guibg=Black
 highlight ALEWarning ctermfg=Black ctermbg=DarkGrey guifg=#ED6237 guibg=Black
 let g:ale_linters = {'python': ['mypy', 'flake8', 'pylint'], 'sh': ['shellcheck'], 'markdown': ['vale', 'markdownlint'], 'text': ['vale']}
+let b:ale_fixers = {'python': ['black'], 'terraform': ['terraform']}
 let g:ale_python_flake8_options = '--max-line-length=90'
 let g:ale_python_mypy_options = '--strict'
+let g:ale_fix_on_save = 1
 
 
 """"""""""""""""""""""""""""vim-matchup settings"""""""""""""""""""""""""""""

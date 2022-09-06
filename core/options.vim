@@ -1,5 +1,7 @@
 scriptencoding utf-8
 
+set list listchars=tab:>\ ,trail:-,eol:$
+
 " change fillchars for folding, vertical split, end of buffer, and message separator
 set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 
