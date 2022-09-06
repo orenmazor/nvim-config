@@ -24,10 +24,11 @@ highlight ALEErrorSign ctermfg=9 ctermbg=Black guifg=#C30500 guibg=Black
 highlight ALEWarningSign ctermfg=11 ctermbg=Black guifg=#ED6237 guibg=Black
 highlight ALEError ctermfg=Black ctermbg=DarkGrey guifg=#C30500 guibg=Black
 highlight ALEWarning ctermfg=Black ctermbg=DarkGrey guifg=#ED6237 guibg=Black
-let g:ale_linters = {'python': ['mypy', 'flake8', 'pylint'], 'sh': ['shellcheck'], 'markdown': ['vale', 'markdownlint'], 'text': ['vale']}
+let g:ale_linters = {'python': ['flake8','mypy'], 'sh': ['shellcheck'], 'markdown': ['vale', 'markdownlint'], 'text': ['vale']}
 let b:ale_fixers = {'python': ['black'], 'terraform': ['terraform']}
 let g:ale_python_flake8_options = '--max-line-length=90'
 let g:ale_python_mypy_options = '--strict'
+let g:ale_python_auto_poetry = 1
 let g:ale_fix_on_save = 1
 
 

@@ -43,8 +43,6 @@ packer.startup({
     { noremap = true, silent = true })
           end
         }
-    -- Python indent (follows the PEP8 style)
-    use({ "psf/black", ft = { "python" } })
 
     -- Clear highlight search automatically for you
     -- use({"romainl/vim-cool", event = "VimEnter"})
