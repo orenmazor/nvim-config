@@ -42,15 +42,6 @@ packer.startup({
     -- Python indent (follows the PEP8 style)
     use({ "psf/black", ft = { "python" } })
 
-    -- Super fast buffer jump
-    use {
-      'phaazon/hop.nvim',
-      event = "VimEnter",
-      config = function()
-        vim.defer_fn(function() require('config.nvim_hop') end, 2000)
-      end
-    }
-
     -- Clear highlight search automatically for you
     -- use({"romainl/vim-cool", event = "VimEnter"})
 
