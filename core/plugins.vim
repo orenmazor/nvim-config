@@ -118,15 +118,6 @@ let g:Lf_PopupColorscheme = 'gruvbox_material'
 " items.
 let g:Lf_CommandMap = {'<C-J>': ['<C-N>'], '<C-K>': ['<C-P>']}
 
-""""""""""""""""""""""""""""open-browser.vim settings"""""""""""""""""""
-if g:is_win || g:is_mac
-  " Disable netrw's gx mapping.
-  let g:netrw_nogx = 1
-
-  " Use another mapping for the open URL method
-  nmap ob <Plug>(openbrowser-smart-search)
-  xmap ob <Plug>(openbrowser-smart-search)
-endif
 
 """"""""""""""""""""""""""""vim-yoink settings"""""""""""""""""""""""""
 if g:is_win || g:is_mac
