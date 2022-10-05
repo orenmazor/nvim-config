@@ -25,6 +25,9 @@ packer.startup({
     -- impatient.nvim automatically speeds up neovim bootup time
     use {'lewis6991/impatient.nvim', config = [[require('impatient')]]}
 
+    -- paranthesis matching
+    use({'andymass/vim-matchup'})
+
     -- package management for neovim
     use({"wbthomason/packer.nvim", opt = true})
 
