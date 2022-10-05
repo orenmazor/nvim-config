@@ -31,15 +31,13 @@ else
 endif
 
 " Custom mapping <leader> (see `:h mapleader` for more info)
-let g:mapleader = ','
+let g:mapleader = "\<Space>"
 
 " Enable highlighting for lua HERE doc inside vim script
 let g:vimsyn_embed = 'l'
 
 " Use English as main language
-if !g:is_mac
-  language en_US.utf-8
-endif
+language en_US.utf-8
 
 " use filetype.lua instead of filetype.vim
 let g:do_filetype_lua = 1
@@ -74,4 +72,4 @@ let g:loaded_matchparen = 1
 
 " Disable sql omni completion, it is broken.
 let g:loaded_sql_completion = 1
-"} 
+"}

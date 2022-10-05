@@ -28,21 +28,14 @@ packer.startup({
     -- package management for neovim
     use({"wbthomason/packer.nvim", opt = true})
 
+    -- dynamic filetype detection
+    use("nathom/filetype.nvim")
     -- linter support with ale
     use({'dense-analysis/ale'})
-    
+
     -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
     use({ "neovim/nvim-lspconfig", config = [[require('config.lsp')]] })
 
-
-    use({'ibhagwan/fzf-lua'})
-    use { 'junegunn/fzf',
-          config = function()
-            vim.api.nvim_set_keymap('n', '<c-P>',
-    "<cmd>lua require('fzf-lua').files({ prompt=\"LS> \", cmd = \"find .\", cwd=\".\" })<CR>",
-    { noremap = true, silent = true })
-          end
-        }
 
     -- Clear highlight search automatically for you
     -- use({"romainl/vim-cool", event = "VimEnter"})
@@ -54,6 +47,9 @@ packer.startup({
       keys = {{'n', '*'}, {'n', '#'}, {'n', 'n'}, {'n', 'N'}},
       config = [[require('config.hlslens')]]
     }
+
+    -- install the leaderf plugin
+    use({"Yggdroot/LeaderF"})
 
     -- A list of colorscheme plugin you may want to try. Find what suits you.
     use({"catppuccin/nvim", as = "catppuccin", opt = true})

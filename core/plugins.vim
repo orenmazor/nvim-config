@@ -24,11 +24,20 @@ highlight ALEErrorSign ctermfg=9 ctermbg=Black guifg=#C30500 guibg=Black
 highlight ALEWarningSign ctermfg=11 ctermbg=Black guifg=#ED6237 guibg=Black
 highlight ALEError ctermfg=Black ctermbg=DarkGrey guifg=#C30500 guibg=Black
 highlight ALEWarning ctermfg=Black ctermbg=DarkGrey guifg=#ED6237 guibg=Black
-let g:ale_linters = {'python': ['flake8','mypy'], 'sh': ['shellcheck'], 'markdown': ['vale', 'markdownlint'], 'text': ['vale']}
-let b:ale_fixers = {'python': ['black'], 'terraform': ['terraform']}
+let g:ale_linters = {'python': ['flake8','mypy'],
+      \ 'lua': ['luacheck'],
+      \ 'sh': ['shellcheck'],
+      \ 'markdown': ['vale', 'markdownlint'],
+      \ 'text': ['vale'],
+      \ 'yaml': ['yamllint'],
+      \ 'terraform': ['terraform', 'tflint']}
+
+let g:ale_fixers = {'python': ['black'],
+      \ 'terraform': ['terraform'],
+      \ 'yaml': ['yamlfix', 'prettier'],
+      \ '*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_python_flake8_options = '--max-line-length=90'
 let g:ale_python_mypy_options = '--strict'
-let g:ale_python_auto_poetry = 1
 let g:ale_fix_on_save = 1
 
 
@@ -50,19 +59,19 @@ let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 """""""""""""""""""""""""""""LeaderF settings"""""""""""""""""""""
 " Do not use cache file
-let g:Lf_UseCache = 0
-" Refresh each time we call leaderf
-let g:Lf_UseMemoryCache = 0
+" let g:Lf_UseCache = 1
+" " Refresh each time we call leaderf
+" let g:Lf_UseMemoryCache = 1
 
 " Ignore certain files and directories when searching files
-let g:Lf_WildIgnore = {
-  \ 'dir': ['.git', '__pycache__', '.DS_Store'],
-  \ 'file': ['*.exe', '*.dll', '*.so', '*.o', '*.pyc', '*.jpg', '*.png',
-  \ '*.gif', '*.svg', '*.ico', '*.db', '*.tgz', '*.tar.gz', '*.gz',
-  \ '*.zip', '*.bin', '*.pptx', '*.xlsx', '*.docx', '*.pdf', '*.tmp',
-  \ '*.wmv', '*.mkv', '*.mp4', '*.rmvb', '*.ttf', '*.ttc', '*.otf',
-  \ '*.mp3', '*.aac']
-  \}
+" let g:Lf_WildIgnore = {
+"   \ 'dir': ['__pycache__', '.DS_Store'],
+"   \ 'file': ['*.exe', '*.dll', '*.so', '*.o', '*.pyc', '*.jpg', '*.png',
+"   \ '*.gif', '*.svg', '*.ico', '*.db', '*.tgz', '*.tar.gz', '*.gz',
+"   \ '*.zip', '*.bin', '*.pptx', '*.xlsx', '*.docx', '*.pdf', '*.tmp',
+"   \ '*.wmv', '*.mkv', '*.mp4', '*.rmvb', '*.ttf', '*.ttc', '*.otf',
+"   \ '*.mp3', '*.aac']
+"   \}
 
 " Only fuzzy-search files names
 let g:Lf_DefaultMode = 'FullPath'
@@ -79,21 +88,23 @@ let g:Lf_PopupPosition = [0, float2nr((&columns - g:Lf_PopupWidth)/2)]
 
 " Do not use version control tool to list files under a directory since
 " submodules are not searched by default.
-let g:Lf_UseVersionControlTool = 0
+let g:Lf_UseVersionControlTool = 1
 
 " Use rg as the default search tool
 let g:Lf_DefaultExternalTool = "rg"
 
 " show dot files
-let g:Lf_ShowHidden = 1
+let g:Lf_ShowHidden = 0
 
-" Disable default mapping
+" " Disable default mapping
 let g:Lf_ShortcutF = ''
 let g:Lf_ShortcutB = ''
 
 " set up working directory for git repository
 let g:Lf_WorkingDirectoryMode = 'a'
 
+" remember where you stopped
+" let g:Lf_RememberLastSearch = 1
 " Search files in popup window
 nnoremap <silent> <leader>ff :<C-U>Leaderf file --popup<CR>
 

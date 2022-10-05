@@ -25,15 +25,6 @@ augroup accurate_syn_highlight
   autocmd BufEnter * :syntax sync fromstart
 augroup END
 
-" Display a message when the current file is not in utf-8 format.
-" Note that we need to use `unsilent` command here because of this issue:
-" https://github.com/vim/vim/issues/4379
-augroup non_utf8_file_warn
-  autocmd!
-  " we can not use `lua vim.notify()`: it will error out E5107 parsing lua.
-  autocmd BufRead * if &fileencoding != 'utf-8' | call v:lua.vim.notify('File not in UTF-8 format!', 'warn', {'title': 'nvim-config'}) | endif
-augroup END
-
 " Automatically reload the file if it is changed outside of Nvim, see
 " https://unix.stackexchange.com/a/383044/221410. It seems that `checktime`
 " command does not work in command line. We need to check if we are in command
@@ -88,4 +79,3 @@ augroup packer_auto_compile
   autocmd!
   autocmd BufWritePost */nvim/lua/plugins.lua source <afile> | PackerCompile
 augroup END
-
