@@ -34,7 +34,6 @@ let g:ale_linters = {'python': ['flake8','mypy'],
 
 let g:ale_fixers = {'python': ['black'],
       \ 'terraform': ['terraform'],
-      \ 'yaml': ['yamlfix', 'prettier'],
       \ '*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_python_flake8_options = '--max-line-length=90'
 let g:ale_python_mypy_options = '--strict'

@@ -32,7 +32,17 @@ packer.startup({
     use({"wbthomason/packer.nvim", opt = true})
 
     -- dynamic filetype detection
-    use("nathom/filetype.nvim")
+    -- use({"nathom/filetype.nvim",
+    -- config = function()
+    --     vim.defer_fn(function()
+    --       require("filetype").setup({
+    --         overrides = {
+    --           extensions = {
+    --             tf = "terraform",
+    --           }}})
+    --         end, 2000)
+    --       end
+    --     })
     -- linter support with ale
     use({'dense-analysis/ale'})
 
